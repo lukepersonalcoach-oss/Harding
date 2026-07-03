@@ -30,6 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---- Homepage: greeting splash auto-scrolls into the hero ---- */
+  const splash = document.getElementById('splash');
+  const firstPhrase = document.querySelector('.sentence-section[data-phrase="1"]');
+  if (splash && firstPhrase) {
+    let userHasScrolled = false;
+    const markScrolled = () => { userHasScrolled = true; };
+    window.addEventListener('scroll', markScrolled, { passive: true });
+    window.addEventListener('wheel', markScrolled, { passive: true });
+    window.addEventListener('touchmove', markScrolled, { passive: true });
+
+    // "Professional learning" appears at 0.2s, "for schools" at 1.3s,
+    // each takes 0.9s to fade in — give it a beat after that, then move on.
+    setTimeout(() => {
+      if (!userHasScrolled) {
+        firstPhrase.scrollIntoView({ behavior: 'smooth' });
+      }
+      window.removeEventListener('scroll', markScrolled);
+      window.removeEventListener('wheel', markScrolled);
+      window.removeEventListener('touchmove', markScrolled);
+    }, 2900);
+  }
+
   /* ---- Homepage: scroll-built sentence ---- */
   const phraseSections = document.querySelectorAll('.sentence-section');
   if (phraseSections.length) {
