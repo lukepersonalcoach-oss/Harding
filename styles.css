@@ -106,7 +106,7 @@ button:focus-visible {
 }
 
 .brand img {
-  height: 34px;
+  height: 50px;
   width: auto;
 }
 
@@ -239,12 +239,16 @@ button:focus-visible {
 
 .sentence-section {
   position: relative;
-  min-height: 100svh;
+  min-height: 62vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px var(--gutter) 80px;
+  padding: 40px var(--gutter);
   overflow: hidden;
+}
+
+.sentence-section:first-of-type {
+  padding-top: 120px;
 }
 
 .sentence-phrase {
@@ -255,7 +259,7 @@ button:focus-visible {
   font-size: clamp(28px, 5.4vw, 58px);
   color: var(--stone-light);
   line-height: 1.25;
-  opacity: 0.25;
+  opacity: 0.35;
   transform: translateY(18px);
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), color 0.7s var(--ease);
 }
