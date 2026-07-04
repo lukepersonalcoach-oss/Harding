@@ -150,10 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         void answerPanel.offsetWidth;
         answerPanel.classList.add('is-visible');
 
-        // On smaller screens, bring the answer into view
-        if (window.innerWidth < 900) {
-          answerPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        // Bring the answer gently into view, on any screen size
+        answerPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
   }
