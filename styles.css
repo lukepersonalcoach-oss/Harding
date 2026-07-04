@@ -503,76 +503,142 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   Vignettes (Solutions page)
+   Solutions page — splash, problem tiles, answer panel
    ========================================================================== */
 
-.vignette-list {
+.solutions-splash {
+  text-align: center;
+  padding: 160px var(--gutter) 60px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.solutions-splash .eyebrow { display: block; }
+
+.solutions-lead {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 6vw, 58px);
+  color: var(--navy);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: splash-in 0.8s var(--ease) 0.15s forwards;
+}
+
+.solutions-instruction {
+  margin-top: 20px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--stone);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: splash-in 0.8s var(--ease) 0.55s forwards;
+}
+
+.problem-grid-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px var(--gutter) 100px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.problem-tile {
+  text-align: left;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 26px 22px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 16px;
+  font-family: var(--font-body);
+  color: var(--navy);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
+              box-shadow 0.25s var(--ease), background 0.25s var(--ease);
 }
 
-.vignette {
-  display: grid;
-  grid-template-columns: 90px 1fr 1fr;
-  gap: 40px;
-  padding: 56px 0;
-  border-bottom: 1px solid var(--line);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+.problem-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(27, 42, 74, 0.09);
+  border-color: var(--gold);
 }
-.vignette.is-visible { opacity: 1; transform: translateY(0); }
 
-.vignette:last-child { border-bottom: none; }
+.problem-tile.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+}
 
-.vignette-mark {
+.problem-tile.is-active .tile-mark { color: var(--gold); }
+.problem-tile.is-active .tile-text { color: var(--cream); }
+
+.tile-mark {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 20px;
+  font-size: 14px;
   color: var(--gold-deep);
-  padding-top: 4px;
 }
 
-.vignette-problem .label,
-.vignette-solution .label {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--stone);
-  margin-bottom: 12px;
-}
-
-.vignette-problem h3 {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 12px;
-}
-
-.vignette-problem p,
-.vignette-solution p {
-  color: var(--ink);
+.tile-text {
   font-size: 15.5px;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
-.vignette-solution {
-  border-left: 1px solid var(--line);
-  padding-left: 40px;
+.answer-panel {
+  background: var(--cream-dim);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 48px clamp(24px, 5vw, 64px);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: flex-start;
 }
 
-@media (max-width: 860px) {
-  .vignette {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .vignette-solution {
-    border-left: none;
-    padding-left: 0;
-    padding-top: 4px;
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
-  }
+.answer-placeholder {
+  color: var(--stone);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+}
+
+.answer-title {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.answer-body {
+  font-size: 16px;
+  color: var(--ink);
+  max-width: 700px;
+  line-height: 1.7;
+}
+
+.answer-panel.is-visible > * {
+  animation: answer-in 0.5s var(--ease);
+}
+
+@keyframes answer-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 980px) {
+  .problem-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .solutions-splash { padding-top: 130px; }
 }
 
 /* ==========================================================================
@@ -626,8 +692,6 @@ button:focus-visible {
 }
 
 .about-copy p.placeholder,
-.vignette-problem p.placeholder,
-.vignette-solution p.placeholder,
 .testimonial.placeholder p {
   color: var(--stone-light);
   font-style: italic;

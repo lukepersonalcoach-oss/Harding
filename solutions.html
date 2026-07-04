@@ -32,68 +32,65 @@
 
 <main>
 
-  <div class="page-hero">
-    <span class="eyebrow">Solutions</span>
-    <h1>[Placeholder] Real problems school leaders bring to Harding — and how we work through them together.</h1>
-    <p class="lede">[Placeholder] A short line here framing the vignettes below — e.g. these aren't hypothetical case studies, they're the shape of real conversations with real school leaders.</p>
-  </div>
-
-  <div class="section-divider"><hr></div>
-
   <!-- ==========================================================
-       VIGNETTE LIST
-       Each .vignette is one problem/solution pairing.
-       Duplicate the block to add more vignettes.
-       >>> PLACEHOLDER COPY throughout <<<
+       SPLASH
        ========================================================== -->
 
-  <section class="section">
-    <div class="vignette-list" id="vignetteList">
+  <div class="solutions-splash">
+    <span class="eyebrow">Solutions</span>
+    <p class="solutions-lead">Learning is the solution.</p>
+    <p class="solutions-instruction">Click on your problem — get in touch if it sounds familiar.</p>
+  </div>
 
-      <article class="vignette">
-        <div class="vignette-mark">01</div>
-        <div class="vignette-problem">
-          <span class="label">The problem</span>
-          <h3>[Placeholder headline — e.g. "A new leadership team, and a staffroom that doesn't trust it yet"]</h3>
-          <p class="placeholder">[Placeholder] A paragraph describing the situation a school leader was facing — specific enough to feel real, without naming the school.</p>
-        </div>
-        <div class="vignette-solution">
-          <span class="label">How Harding helped</span>
-          <p class="placeholder">[Placeholder] What Harding did — the training, coaching or advisory approach taken — and the shift that followed.</p>
-        </div>
-      </article>
+  <!-- ==========================================================
+       PROBLEM TILES
+       Click a tile to populate the answer panel below via
+       script.js (see the SOLUTIONS array).
+       ========================================================== -->
 
-      <article class="vignette">
-        <div class="vignette-mark">02</div>
-        <div class="vignette-problem">
-          <span class="label">The problem</span>
-          <h3>[Placeholder headline — e.g. "Good teachers, inconsistent teaching"]</h3>
-          <p class="placeholder">[Placeholder] A paragraph describing the situation a school leader was facing.</p>
-        </div>
-        <div class="vignette-solution">
-          <span class="label">How Harding helped</span>
-          <p class="placeholder">[Placeholder] What Harding did, and the outcome.</p>
-        </div>
-      </article>
+  <section class="problem-grid-section">
+    <div class="problem-grid" id="problemGrid">
+      <button class="problem-tile" data-index="0" type="button">
+        <span class="tile-mark">01</span>
+        <span class="tile-text">I need a compelling INSET keynote</span>
+      </button>
+      <button class="problem-tile" data-index="1" type="button">
+        <span class="tile-mark">02</span>
+        <span class="tile-text">I want to develop our professional learning culture</span>
+      </button>
+      <button class="problem-tile" data-index="2" type="button">
+        <span class="tile-mark">03</span>
+        <span class="tile-text">There's too much inconsistency in my classrooms</span>
+      </button>
+      <button class="problem-tile" data-index="3" type="button">
+        <span class="tile-mark">04</span>
+        <span class="tile-text">I want to help a struggling teacher turn it around</span>
+      </button>
+      <button class="problem-tile" data-index="4" type="button">
+        <span class="tile-mark">05</span>
+        <span class="tile-text">A member of staff could be more effective in their role</span>
+      </button>
+      <button class="problem-tile" data-index="5" type="button">
+        <span class="tile-mark">06</span>
+        <span class="tile-text">My middle leaders haven't had the training they need</span>
+      </button>
+      <button class="problem-tile" data-index="6" type="button">
+        <span class="tile-mark">07</span>
+        <span class="tile-text">I'm looking for brilliant senior leadership training</span>
+      </button>
+      <button class="problem-tile" data-index="7" type="button">
+        <span class="tile-mark">08</span>
+        <span class="tile-text">We need an outside perspective</span>
+      </button>
+    </div>
 
-      <article class="vignette">
-        <div class="vignette-mark">03</div>
-        <div class="vignette-problem">
-          <span class="label">The problem</span>
-          <h3>[Placeholder headline — e.g. "An INSET day that needed to actually change something"]</h3>
-          <p class="placeholder">[Placeholder] A paragraph describing the situation a school leader was facing.</p>
-        </div>
-        <div class="vignette-solution">
-          <span class="label">How Harding helped</span>
-          <p class="placeholder">[Placeholder] What Harding did, and the outcome.</p>
-        </div>
-      </article>
-
+    <div class="answer-panel" id="answerPanel" aria-live="polite">
+      <p class="answer-placeholder">Choose a problem above — I'll show you exactly how Harding can help.</p>
     </div>
   </section>
 
   <section class="cta-band">
-    <h2>[Placeholder] If part of this sounds familiar, let's talk it through.</h2>
+    <h2>Not seeing your exact problem here? Let's talk it through.</h2>
     <a href="about.html#contact" class="btn btn-outline">Get in touch</a>
   </section>
 

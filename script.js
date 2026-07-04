@@ -81,19 +81,81 @@ document.addEventListener('DOMContentLoaded', () => {
     phraseSections.forEach(section => observer.observe(section));
   }
 
-  /* ---- Solutions page: vignette reveal on scroll ---- */
-  const vignettes = document.querySelectorAll('.vignette');
-  if (vignettes.length) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
+  /* ---- Solutions page: problem tiles ---- */
+  const problemGrid = document.getElementById('problemGrid');
+  const answerPanel = document.getElementById('answerPanel');
+
+  if (problemGrid && answerPanel) {
+    const SOLUTIONS = [
+      {
+        title: "I need a compelling INSET keynote",
+        body: "Your teachers have sat through polished INSET before… you need this one to have a real effect on classroom practice. I bring years of experience in building the keynote around your specific context, working with you so it speaks directly to where your school is right now. Staff are actively engaged with new ideas and leave energised and clear on what to do differently.",
+        cta: "Discuss INSET now"
+      },
+      {
+        title: "I want to develop our professional learning culture",
+        body: "Training days come and go, but little will change without a genuine culture of learning. I bring expertise, experience and extra capacity to embed structures and practices: coaching conversations, peer observation, a shared language around teaching. Staff start taking ownership of their own development so that improvement becomes self-sustaining.",
+        cta: "Start a culture conversation now"
+      },
+      {
+        title: "There's too much inconsistency in my classrooms",
+        body: "You see wildly varying standards when you walk around your school: pupils get a different education depending on which room they're in. I help define a clear, shared standard for effective teaching, then close the gap through instructional coaching, teacher by teacher. Standards rise and teachers feel supported.",
+        cta: "Bring consistency now"
+      },
+      {
+        title: "I want to help a struggling teacher turn it around",
+        body: "Asking a struggling teacher to follow a policy or observe their peers isn't going to cut it. Left unaddressed, this becomes a capability process nobody wants. I provide a clearly documented informal support plan and work closely with the teacher, identifying the specific barriers and coaching concrete, practical changes into their everyday practice. Their classroom stabilises, trust returns, and a difficult HR route is avoided.",
+        cta: "Bring in help now"
+      },
+      {
+        title: "A member of staff could be more effective in their role",
+        body: "You know someone has the potential to do more, but internal line management isn't working. I provide focused, honest coaching that helps the individual see the gap and build a practical, achievable route to success. The colleague feels invested in, not criticised, and you see a genuine, lasting change in performance.",
+        cta: "Arrange coaching now"
+      },
+      {
+        title: "My middle leaders haven't had the training they need",
+        body: "Middle leaders are the engine of school improvement. Too often, though, they're promoted for being excellent teachers and left to figure out leadership on their own. Overstretched SLT colleagues pick up the pieces. I deliver leadership development built specifically for middle leaders: practical, everyday leadership skills, not abstract theory. Middle leaders gain confidence and capability, and strength ripples outward through their departments.",
+        cta: "Discuss middle leadership training now"
+      },
+      {
+        title: "I'm looking for brilliant senior leadership training",
+        body: "In the volatile, uncertain, complex and ambiguous world of education, senior leaders require something more than generic leadership training. My unique course, The Call to Leadership, teaches a coherent philosophy of leadership rather than a jumble of disconnected tools. Your SLT gains a shared understanding of excellence and profound ways to address the challenges ahead.",
+        cta: "Hear more about The Call to Leadership now"
+      },
+      {
+        title: "We need an outside perspective",
+        body: "Some problems seem intractable from inside a school. I come in as an experienced, objective advisor, finding new data, offering clear diagnosis, and working alongside you to design a practical way through. I offer clarity, new perspectives, a workable plan; you gain an experienced outside view in your corner.",
+        cta: "Get an outside view now"
+      }
+    ];
+
+    const tiles = problemGrid.querySelectorAll('.problem-tile');
+
+    tiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        const index = Number(tile.getAttribute('data-index'));
+        const data = SOLUTIONS[index];
+        if (!data) return;
+
+        tiles.forEach(t => t.classList.remove('is-active'));
+        tile.classList.add('is-active');
+
+        answerPanel.classList.remove('is-visible');
+        answerPanel.innerHTML =
+          '<h3 class="answer-title">' + data.title + '</h3>' +
+          '<p class="answer-body">' + data.body + '</p>' +
+          '<a href="about.html#contact" class="btn btn-gold">' + data.cta + '</a>';
+
+        // Force reflow so the entrance animation replays each time
+        void answerPanel.offsetWidth;
+        answerPanel.classList.add('is-visible');
+
+        // On smaller screens, bring the answer into view
+        if (window.innerWidth < 900) {
+          answerPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
-    }, { threshold: 0.2 });
-
-    vignettes.forEach(v => revealObserver.observe(v));
+    });
   }
 
 });
