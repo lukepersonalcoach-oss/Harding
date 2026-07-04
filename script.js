@@ -2,38 +2,56 @@
 // Harding — shared site behaviour
 // ==========================================================================
 
-// Slower, gentler scroll than the browser default — used for the
-// homepage auto-scroll and the Solutions page answer reveal.
-function smoothScrollTo(el, { duration = 1600, center = false } = {}) {
+// Custom scroll animation — used for the homepage auto-scroll and the
+// Solutions page answer reveal. Runs entirely under manual control via
+// requestAnimationFrame, rather than the browser's built-in smooth
+// scrolling, which produces a single, consistent motion instead of two
+// animations competing with each other.
+function smoothScrollTo(el, { duration = 1500, center = false } = {}) {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const docEl = document.documentElement;
+
   const startY = window.scrollY || window.pageYOffset;
   const rect = el.getBoundingClientRect();
   let targetY = rect.top + startY;
   if (center) {
     targetY -= (window.innerHeight - rect.height) / 2;
   }
+  const maxScroll = docEl.scrollHeight - window.innerHeight;
+  targetY = Math.max(0, Math.min(targetY, maxScroll));
 
-  if (prefersReduced) {
-    window.scrollTo({ top: targetY, left: 0, behavior: 'auto' });
+  const distance = targetY - startY;
+  if (prefersReduced || Math.abs(distance) < 1) {
+    window.scrollTo(0, targetY);
     return;
   }
 
-  const distance = targetY - startY;
+  // The page's CSS sets scroll-behavior: smooth (for ordinary anchor
+  // links). That setting also applies to scrollTo() calls made from
+  // here, which would layer the browser's own smoothing on top of ours.
+  // Overriding it with an inline style for the duration of the
+  // animation guarantees our frame-by-frame positioning is the only
+  // thing moving the page, then we restore whatever was there before.
+  const previousBehavior = docEl.style.scrollBehavior;
+  docEl.style.scrollBehavior = 'auto';
+
   let startTime = null;
 
-  // easeInOutCubic — a smoother, more flowing curve than quad, with no
-  // hard hand-off partway through
-  const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  // easeOutCubic — moves immediately, then settles gently into place.
+  // Reads as a single deliberate motion rather than a mechanical ramp.
+  const ease = t => 1 - Math.pow(1 - t, 3);
 
   function step(timestamp) {
-    if (!startTime) startTime = timestamp;
+    if (startTime === null) startTime = timestamp;
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    // behavior: 'auto' here is essential — without it, the page's own
-    // CSS scroll-behavior:smooth fights our animation frame-by-frame,
-    // which is what caused the slow-then-jumpy stutter.
-    window.scrollTo({ top: startY + distance * ease(progress), left: 0, behavior: 'auto' });
-    if (progress < 1) requestAnimationFrame(step);
+    window.scrollTo(0, Math.round(startY + distance * ease(progress)));
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      docEl.style.scrollBehavior = previousBehavior;
+    }
   }
   requestAnimationFrame(step);
 }
@@ -80,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // each takes 0.9s to fade in — give it a beat after that, then move on.
     setTimeout(() => {
       if (!userHasScrolled) {
-        smoothScrollTo(firstPhrase, { duration: 1900 });
+        smoothScrollTo(firstPhrase, { duration: 1500 });
       }
       window.removeEventListener('scroll', markScrolled);
       window.removeEventListener('wheel', markScrolled);
@@ -187,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         answerPanel.classList.add('is-visible');
 
         // Bring the answer gently into view, on any screen size
-        smoothScrollTo(answerPanel, { duration: 1400, center: true });
+        smoothScrollTo(answerPanel, { duration: 1100, center: true });
       });
     });
   }
