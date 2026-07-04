@@ -14,21 +14,25 @@ function smoothScrollTo(el, { duration = 1600, center = false } = {}) {
   }
 
   if (prefersReduced) {
-    window.scrollTo(0, targetY);
+    window.scrollTo({ top: targetY, left: 0, behavior: 'auto' });
     return;
   }
 
   const distance = targetY - startY;
   let startTime = null;
 
-  // easeInOutQuad — gentle acceleration and deceleration, no abrupt snap
-  const ease = t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  // easeInOutCubic — a smoother, more flowing curve than quad, with no
+  // hard hand-off partway through
+  const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
   function step(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, startY + distance * ease(progress));
+    // behavior: 'auto' here is essential — without it, the page's own
+    // CSS scroll-behavior:smooth fights our animation frame-by-frame,
+    // which is what caused the slow-then-jumpy stutter.
+    window.scrollTo({ top: startY + distance * ease(progress), left: 0, behavior: 'auto' });
     if (progress < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);

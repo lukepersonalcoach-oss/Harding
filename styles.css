@@ -551,9 +551,9 @@ button:focus-visible {
 
 .problem-tile {
   text-align: left;
-  background: var(--cream);
+  background: linear-gradient(165deg, #FFFFFF 0%, var(--cream) 65%);
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 30px 24px;
   cursor: pointer;
   display: flex;
@@ -561,19 +561,45 @@ button:focus-visible {
   min-height: 108px;
   font-family: var(--font-body);
   color: var(--navy);
-  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
-              box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(27, 42, 74, 0.06),
+    0 8px 20px rgba(27, 42, 74, 0.06);
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease),
+              box-shadow 0.3s var(--ease), background 0.3s var(--ease);
 }
 
 .problem-tile:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(27, 42, 74, 0.09);
+  transform: translateY(-4px);
   border-color: var(--gold);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 4px rgba(27, 42, 74, 0.08),
+    0 16px 32px rgba(27, 42, 74, 0.12);
+}
+
+.problem-tile:active {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 3px rgba(27, 42, 74, 0.12),
+    0 4px 10px rgba(27, 42, 74, 0.1);
 }
 
 .problem-tile.is-active {
-  background: var(--navy);
-  border-color: var(--navy);
+  background: linear-gradient(165deg, var(--navy-soft) 0%, var(--navy) 55%, var(--navy-deep) 100%);
+  border-color: var(--navy-deep);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 10px 26px rgba(16, 25, 46, 0.35);
+}
+
+.problem-tile.is-active:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 16px 34px rgba(16, 25, 46, 0.4);
 }
 
 .problem-tile.is-active .tile-text { color: var(--cream); }
