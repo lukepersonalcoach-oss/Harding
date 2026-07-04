@@ -2,6 +2,38 @@
 // Harding — shared site behaviour
 // ==========================================================================
 
+// Slower, gentler scroll than the browser default — used for the
+// homepage auto-scroll and the Solutions page answer reveal.
+function smoothScrollTo(el, { duration = 1600, center = false } = {}) {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const startY = window.scrollY || window.pageYOffset;
+  const rect = el.getBoundingClientRect();
+  let targetY = rect.top + startY;
+  if (center) {
+    targetY -= (window.innerHeight - rect.height) / 2;
+  }
+
+  if (prefersReduced) {
+    window.scrollTo(0, targetY);
+    return;
+  }
+
+  const distance = targetY - startY;
+  let startTime = null;
+
+  // easeInOutQuad — gentle acceleration and deceleration, no abrupt snap
+  const ease = t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, startY + distance * ease(progress));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- Header: solid background once scrolled ---- */
@@ -44,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // each takes 0.9s to fade in — give it a beat after that, then move on.
     setTimeout(() => {
       if (!userHasScrolled) {
-        firstPhrase.scrollIntoView({ behavior: 'smooth' });
+        smoothScrollTo(firstPhrase, { duration: 1900 });
       }
       window.removeEventListener('scroll', markScrolled);
       window.removeEventListener('wheel', markScrolled);
@@ -151,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         answerPanel.classList.add('is-visible');
 
         // Bring the answer gently into view, on any screen size
-        answerPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        smoothScrollTo(answerPanel, { duration: 1400, center: true });
       });
     });
   }

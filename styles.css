@@ -526,10 +526,11 @@ button:focus-visible {
 }
 
 .solutions-instruction {
-  margin-top: 20px;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: var(--stone);
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(19px, 2.6vw, 26px);
+  color: var(--gold-deep);
   opacity: 0;
   transform: translateY(12px);
   animation: splash-in 0.8s var(--ease) 0.55s forwards;
@@ -553,11 +554,11 @@ button:focus-visible {
   background: var(--cream);
   border: 1px solid var(--line);
   border-radius: 2px;
-  padding: 26px 22px;
+  padding: 30px 24px;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  min-height: 108px;
   font-family: var(--font-body);
   color: var(--navy);
   transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
@@ -575,15 +576,7 @@ button:focus-visible {
   border-color: var(--navy);
 }
 
-.problem-tile.is-active .tile-mark { color: var(--gold); }
 .problem-tile.is-active .tile-text { color: var(--cream); }
-
-.tile-mark {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--gold-deep);
-}
 
 .tile-text {
   font-size: 15.5px;
