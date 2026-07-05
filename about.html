@@ -139,16 +139,64 @@
 
   <!-- ==========================================================
        CONTACT
-       Placeholder — decide later whether this is a form
-       (needs a form-handling service) or a simple mailto link.
+       Netlify Forms handles submissions natively — no backend
+       needed. The hidden "form-name" input and the honeypot
+       field are both required for Netlify's form detection and
+       spam filtering to work.
        ========================================================== -->
 
   <section class="section" id="contact">
     <div class="section-divider" style="padding:0 0 60px;"><hr></div>
     <span class="eyebrow">Get in touch</span>
-    <h2 style="font-weight:400; font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px;">[Placeholder] Let's talk about your school.</h2>
-    <p class="lede" style="margin-bottom: 32px;">[Placeholder] A line inviting school leaders to reach out, plus how you prefer to be contacted.</p>
-    <a href="mailto:hello@example.com" class="btn btn-gold">Email Harding</a>
+    <h2 style="font-weight:400; font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px;">Let's talk about your school.</h2>
+    <p class="lede" style="margin-bottom: 12px;">Fill in the form below, or email me directly at <a href="mailto:luke@hardingconsultancy.co.uk" class="inline-link">luke@hardingconsultancy.co.uk</a>.</p>
+
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="contact-form"
+      id="contactForm"
+    >
+      <input type="hidden" name="form-name" value="contact">
+      <p class="visually-hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
+
+      <div class="form-field">
+        <label for="field-name">Name</label>
+        <input type="text" id="field-name" name="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-org">School / Organisation</label>
+        <input type="text" id="field-org" name="organisation" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-email">Email</label>
+        <input type="email" id="field-email" name="email" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-phone">Phone <span class="optional-tag">(optional)</span></label>
+        <input type="tel" id="field-phone" name="phone">
+      </div>
+
+      <div class="form-field full">
+        <label for="field-message">How can I help?</label>
+        <textarea id="field-message" name="message" rows="5"></textarea>
+      </div>
+
+      <div class="form-field full">
+        <button type="submit" class="btn btn-gold">Send Message</button>
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <p>Thank you — your message has been sent. I'll be in touch soon.</p>
+    </div>
   </section>
 
 </main>

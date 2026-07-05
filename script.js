@@ -210,4 +210,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---- About page: contact form (Netlify Forms, submitted via fetch
+     so we can show an inline success message instead of navigating away) ---- */
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (contactForm && formSuccess) {
+    const encode = (data) =>
+      Object.keys(data)
+        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+        .join('&');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(contactForm));
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(data)
+      })
+        .then(() => {
+          contactForm.style.display = 'none';
+          formSuccess.classList.add('is-visible');
+        })
+        .catch(() => {
+          // If the request itself fails (e.g. offline), fall back to a
+          // normal form submission so the message still has a chance
+          // to go through.
+          contactForm.submit();
+        });
+    });
+  }
+
 });
