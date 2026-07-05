@@ -660,6 +660,79 @@ button:focus-visible {
   .solutions-splash { padding-top: 130px; }
 }
 
+.section-heading {
+  font-weight: 400;
+  font-size: clamp(26px, 3.6vw, 36px);
+  margin-bottom: 28px;
+}
+
+.prose {
+  max-width: 760px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.prose:last-child { margin-bottom: 0; }
+
+.expertise-approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+}
+
+.expertise-block h2,
+.approach-block h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 400;
+  margin-bottom: 26px;
+}
+
+.dash-list,
+.dot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dash-list li,
+.dot-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 15.5px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.dash-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold-deep);
+}
+
+.dot-list li::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+@media (max-width: 760px) {
+  .expertise-approach-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
 /* ==========================================================================
    About page
    ========================================================================== */
