@@ -1121,3 +1121,102 @@ button:focus-visible {
 .footer-links { display: flex; gap: 28px; font-size: 13px; color: var(--stone); }
 .footer-links a:hover { color: var(--navy); }
 .footer-meta { font-size: 12px; color: var(--stone-light); }
+/* ==========================================================
+   PRESS SECTION
+   Add this block to styles.css. Matches the existing card/grid
+   conventions used by .testimonial-grid and .expertise-approach-grid.
+   Adjust colours/spacing values to match your existing variables
+   if you have them defined (e.g. swap #1B2A4A / #E8A317 for your
+   existing CSS custom properties).
+   ========================================================== */
+
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .press-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.press-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e8e5df;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.press-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(27, 42, 74, 0.08);
+}
+
+.press-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f4f2ed;
+}
+
+.press-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.press-body {
+  padding: 20px 22px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.press-pub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E8A317;
+  margin-bottom: 8px;
+}
+
+.press-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 21px;
+  color: #1B2A4A;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.press-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4a4a4a;
+  margin: 0 0 16px 0;
+  flex-grow: 1;
+}
+
+.press-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1B2A4A;
+}
+
+.press-card:hover .press-link {
+  color: #E8A317;
+}
