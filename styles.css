@@ -214,6 +214,10 @@ button:focus-visible {
 }
 
 @media (max-width: 760px) {
+  .brand img {
+    height: 64px;
+  }
+
   .header-right {
     gap: 14px;
   }
@@ -397,6 +401,16 @@ button:focus-visible {
   50% { opacity: 1; }
 }
 
+@media (max-width: 760px) {
+  .sentence-section {
+    min-height: 42vh;
+    padding: 24px var(--gutter);
+  }
+  .sentence-section:first-of-type {
+    padding-top: 130px;
+  }
+}
+
 /* Final assembled sentence + CTA */
 .sentence-final {
   min-height: 100svh;
@@ -458,7 +472,7 @@ button:focus-visible {
    ========================================================================== */
 
 .page-hero {
-  padding: 160px var(--gutter) 80px;
+  padding: 160px var(--gutter) 30px;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -1031,7 +1045,7 @@ button:focus-visible {
   border-top: 1px solid var(--line);
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 17px;
+  font-size: 21px;
   color: var(--stone);
 }
 
