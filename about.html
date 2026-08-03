@@ -201,6 +201,7 @@
       id="contactForm"
     >
       <input type="hidden" name="form-name" value="contact">
+      <input type="hidden" name="solution-interest" id="field-interest" value="">
       <p class="visually-hidden">
         <label>Don't fill this out if you're human: <input name="bot-field"></label>
       </p>
@@ -211,13 +212,13 @@
       </div>
 
       <div class="form-field">
-        <label for="field-org">School / Organisation</label>
-        <input type="text" id="field-org" name="organisation" required>
+        <label for="field-org">School / Organisation <span class="optional-tag">(optional)</span></label>
+        <input type="text" id="field-org" name="organisation">
       </div>
 
       <div class="form-field">
         <label for="field-email">Email</label>
-        <input type="email" id="field-email" name="email" required>
+        <input type="email" id="field-email" name="email">
       </div>
 
       <div class="form-field">
@@ -226,9 +227,25 @@
       </div>
 
       <div class="form-field full">
+        <span class="checkbox-group-label">How would you prefer I get in touch?</span>
+        <div class="checkbox-group">
+          <label class="checkbox-option">
+            <input type="checkbox" name="contact-preference" value="Email" id="pref-email">
+            Email
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="contact-preference" value="Phone" id="pref-phone">
+            Phone
+          </label>
+        </div>
+      </div>
+
+      <div class="form-field full">
         <label for="field-message">How can I help?</label>
         <textarea id="field-message" name="message" rows="5"></textarea>
       </div>
+
+      <p class="form-error" id="formError">Please add an email address or phone number so I can get back to you.</p>
 
       <div class="form-field full">
         <button type="submit" class="btn btn-gold">Send Message</button>

@@ -143,42 +143,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const SOLUTIONS = [
       {
         title: "I need a compelling INSET keynote",
-        body: "Your teachers have sat through polished INSET before… you need this one to have a real effect on classroom practice. I bring years of experience in building the keynote around your specific context, working with you so it speaks directly to where your school is right now. Staff are actively engaged with new ideas and leave energised and clear on what to do differently.",
+        body: "Your teachers have sat through polished INSET before… this one needs to have a real effect on classroom practice. I build the keynote around your specific context, working with you so it speaks directly to where your school is right now. Staff are actively engaged with new ideas and leave the session with energy and clarity.",
         cta: "Discuss INSET now"
       },
       {
         title: "I want to develop our professional learning culture",
-        body: "Training days come and go, but little will change without a genuine culture of learning. I bring expertise, experience and extra capacity to embed structures and practices: coaching conversations, peer observation, a shared language around teaching. Staff start taking ownership of their own development so that improvement becomes self-sustaining.",
+        body: "Training days come and go, but little will change without a genuine culture of learning. I bring expertise, experience and extra capacity to embed structures and practices: a shared language, coaching conversations, peer observation. Staff are supported to take ownership of their own development and improvement becomes self-sustaining.",
         cta: "Start a culture conversation now"
       },
       {
         title: "There's too much inconsistency in my classrooms",
-        body: "You see wildly varying standards when you walk around your school: pupils get a different education depending on which room they're in. I help define a clear, shared standard for effective teaching, then close the gap through instructional coaching, teacher by teacher. Standards rise and teachers feel supported.",
+        body: "You see wildly varying standards when you walk around your school: pupils get a different education depending on which room they're in. I help define a clear, shared standard for effective teaching, then close the gap through middle leadership support and targeted instructional coaching. Standards rise and teachers feel supported.",
         cta: "Bring consistency now"
       },
       {
-        title: "I want to help a struggling teacher turn it around",
-        body: "Asking a struggling teacher to follow a policy or observe their peers isn't going to cut it. Left unaddressed, this becomes a capability process nobody wants. I provide a clearly documented informal support plan and work closely with the teacher, identifying the specific barriers and coaching concrete, practical changes into their everyday practice. Their classroom stabilises, trust returns, and a difficult HR route is avoided.",
+        title: "I want to support one of our teachers",
+        subtitle: "‘Classroom Impact’ – instructional coaching",
+        body: "Sometimes colleagues struggle. Left unaddressed, it can end up in a capability process nobody wants. But just telling a teacher to follow policy or observe their peers isn't going to cut it. I provide a thoroughly documented informal support plan and work closely with the teacher, identifying the specific barriers and coaching concrete, practical changes into their everyday practice. Their classroom stabilises, trust returns, and a difficult HR route is avoided.",
         cta: "Bring in help now"
       },
       {
         title: "A member of staff could be more effective in their role",
-        body: "You know someone has the potential to do more, but internal line management isn't working. I provide focused, honest coaching that helps the individual see the gap and build a practical, achievable route to success. The colleague feels invested in, not criticised, and you see a genuine, lasting change in performance.",
-        cta: "Arrange coaching now"
+        subtitle: "Performance coaching",
+        body: "You know someone has the potential to do more, but internal line management isn't working. I contract with the colleague and their line manager to provide focused, honest coaching that reveals the gap and builds a practical, achievable route to success. The colleague feels invested in, not criticised, and you see a genuine, lasting change in performance.",
+        cta: "Sponsor coaching now"
       },
       {
-        title: "My middle leaders haven't had the training they need",
-        body: "Middle leaders are the engine of school improvement. Too often, though, they're promoted for being excellent teachers and left to figure out leadership on their own. Overstretched SLT colleagues pick up the pieces. I deliver leadership development built specifically for middle leaders: practical, everyday leadership skills, not abstract theory. Middle leaders gain confidence and capability, and strength ripples outward through their departments.",
+        title: "Our middle leaders would benefit from further training",
+        body: "Middle leaders are the engine of school improvement. Too often, though, they're promoted for being excellent teachers and left to figure out leadership on their own. Overstretched SLT colleagues pick up the pieces. I deliver leadership development built specifically for middle leaders: practical, everyday leadership skills, not abstract theory. Middle leaders gain confidence and capability which ripples outward through their departments.",
         cta: "Discuss middle leadership training now"
       },
       {
         title: "I'm looking for brilliant senior leadership training",
+        subtitle: "The Call to Leadership – an extraordinary day for teams of 5 to 12 leaders",
         body: "In the volatile, uncertain, complex and ambiguous world of education, senior leaders require something more than generic leadership training. My unique course, The Call to Leadership, teaches a coherent philosophy of leadership rather than a jumble of disconnected tools. Your SLT gains a shared understanding of excellence and profound ways to address the challenges ahead.",
         cta: "Hear more about The Call to Leadership now"
       },
       {
         title: "We need an outside perspective",
-        body: "Some problems seem intractable from inside a school. I come in as an experienced, objective advisor, finding new data, offering clear diagnosis, and working alongside you to design a practical way through. I offer clarity, new perspectives, a workable plan; you gain an experienced outside view in your corner.",
+        body: "Some problems seem intractable from inside a school. I offer an experienced, objective viewpoint, finding new data, offering clear diagnosis, and working alongside you to design a practical way through. I offer clarity, new perspectives, a workable plan; you gain new ideas and extra capacity.",
         cta: "Get an outside view now"
       }
     ];
@@ -197,8 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
         answerPanel.classList.remove('is-visible');
         answerPanel.innerHTML =
           '<h3 class="answer-title">' + data.title + '</h3>' +
+          (data.subtitle ? '<p class="answer-subtitle">' + data.subtitle + '</p>' : '') +
           '<p class="answer-body">' + data.body + '</p>' +
-          '<a href="about.html#contact" class="btn btn-gold">' + data.cta + '</a>';
+          '<a href="about.html?interest=' + encodeURIComponent(data.title) + '#contact" class="btn btn-gold">' + data.cta + '</a>';
 
         // Force reflow so the entrance animation replays each time
         void answerPanel.offsetWidth;
@@ -221,9 +225,35 @@ document.addEventListener('DOMContentLoaded', () => {
         .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
         .join('&');
 
+    // Pre-fill which Solutions CTA the visitor clicked through from, if any
+    const interestField = document.getElementById('field-interest');
+    if (interestField) {
+      const params = new URLSearchParams(window.location.search);
+      const interest = params.get('interest');
+      if (interest) interestField.value = interest;
+    }
+
+    const formError = document.getElementById('formError');
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      const emailVal = contactForm.querySelector('#field-email').value.trim();
+      const phoneVal = contactForm.querySelector('#field-phone').value.trim();
+
+      if (!emailVal && !phoneVal) {
+        if (formError) formError.classList.add('is-visible');
+        return;
+      }
+      if (formError) formError.classList.remove('is-visible');
+
       const data = Object.fromEntries(new FormData(contactForm));
+
+      // Combine checked contact-preference checkboxes into one readable value
+      const preferences = Array.from(
+        contactForm.querySelectorAll('input[name="contact-preference"]:checked')
+      ).map(el => el.value);
+      data['contact-preference'] = preferences.join(', ');
 
       fetch('/', {
         method: 'POST',

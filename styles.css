@@ -649,6 +649,14 @@ button:focus-visible {
   color: var(--navy);
 }
 
+.answer-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold-deep);
+  margin-top: -14px;
+}
+
 .answer-body {
   font-size: 16px;
   color: var(--ink);
@@ -936,6 +944,47 @@ button:focus-visible {
 }
 
 .contact-form .btn { margin-top: 4px; }
+
+.checkbox-group-label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 28px;
+  margin-top: 4px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.checkbox-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.form-error {
+  display: none;
+  grid-column: 1 / -1;
+  color: #A83232;
+  font-size: 14px;
+  margin: -8px 0 0;
+}
+
+.form-error.is-visible { display: block; }
 
 .form-success {
   display: none;
