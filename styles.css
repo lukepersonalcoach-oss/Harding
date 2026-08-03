@@ -1193,6 +1193,20 @@ button:focus-visible {
    existing CSS custom properties).
    ========================================================== */
 
+.press-footnote {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--stone-light);
+}
+
+.press-footnote a {
+  color: var(--stone-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.press-footnote a:hover { color: var(--navy); }
+
 .press-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
