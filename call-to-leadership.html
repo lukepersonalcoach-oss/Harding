@@ -14,6 +14,7 @@
     --navy-light:#2b3f68;
     --gold:#E8A317;
     --gold-light:#f0c063;
+    --gold-deep:#B9800F;
     --cream:#FBF8F1;
     --cream-dark:#f0e9d8;
     --ink:#26313f;
@@ -50,18 +51,20 @@
     display:flex;align-items:center;justify-content:space-between;
     flex-wrap:wrap;gap:14px;
   }
-  .brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:0.02em;}
+  .brand{display:flex;align-items:center;text-decoration:none;}
+  .brand img{height:64px;width:auto;}
   .navlinks{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
   .navlinks a{font-size:0.95rem;text-decoration:none;color:var(--navy);}
   .navlinks a:hover{color:var(--gold);}
   .cta-btn{
-    background:var(--navy);color:var(--cream);
+    background:linear-gradient(180deg,#F5CB6E 0%, var(--gold) 55%, var(--gold-deep) 100%);
+    color:var(--navy);
     padding:10px 20px;border-radius:3px;
-    text-decoration:none;font-size:0.9rem;font-weight:500;
+    text-decoration:none;font-size:0.9rem;font-weight:600;
     letter-spacing:0.02em;
-    transition:background 0.2s ease;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .cta-btn:hover{background:var(--gold);color:var(--navy);}
+  .cta-btn:hover{transform:translateY(-2px);}
 
   .hero{
     background:linear-gradient(180deg,var(--navy) 0%, var(--navy-light) 100%);
@@ -78,8 +81,6 @@
     max-width:620px;margin:0 auto 34px;
     font-size:1.15rem;color:#dfe6f2;
   }
-  .hero .cta-btn{background:var(--gold);color:var(--navy);}
-  .hero .cta-btn:hover{background:var(--gold-light);}
 
   section{padding:64px 0;}
   section.alt{background:var(--cream-dark);}
@@ -167,7 +168,9 @@
 
 <header>
   <nav class="bar">
-    <a class="brand" href="https://hardingconsultancy.co.uk/">Harding</a>
+    <a class="brand" href="https://hardingconsultancy.co.uk/">
+      <img src="assets/new-logo.png" alt="Harding — Leadership, Learning, Coaching">
+    </a>
     <div class="navlinks">
       <a href="https://hardingconsultancy.co.uk/">Home</a>
       <a href="https://hardingconsultancy.co.uk/solutions">Solutions</a>
