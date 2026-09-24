@@ -175,9 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         title: "I'm looking for brilliant senior leadership training",
-        subtitle: "The Call to Leadership – an extraordinary day for teams of 5 to 12 leaders",
-        body: "In the volatile, uncertain, complex and ambiguous world of education, senior leaders require something more than generic leadership training. My unique course, The Call to Leadership, teaches a coherent philosophy of leadership rather than a jumble of disconnected tools. Your SLT gains a shared understanding of excellence and profound ways to address the challenges ahead.",
-        cta: "Hear more about The Call to Leadership now"
+        subtitle: "<a href=\"call-to-leadership.html\" class=\"inline-link\">The Call to Leadership</a> – an extraordinary day for teams of 5 to 12 leaders",
+        body: "In the volatile, uncertain, complex and ambiguous world of education, senior leaders require something more than generic leadership training. My unique course, <a href=\"call-to-leadership.html\" class=\"inline-link\">The Call to Leadership</a>, teaches a coherent philosophy of leadership rather than a jumble of disconnected tools. Your SLT gains a shared understanding of excellence and profound ways to address the challenges ahead.",
+        cta: "Hear more about The Call to Leadership now",
+        ctaHref: "call-to-leadership.html"
       },
       {
         title: "We need an outside perspective",
@@ -202,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
           '<h3 class="answer-title">' + data.title + '</h3>' +
           (data.subtitle ? '<p class="answer-subtitle">' + data.subtitle + '</p>' : '') +
           '<p class="answer-body">' + data.body + '</p>' +
-          '<a href="about.html?interest=' + encodeURIComponent(data.title) + '#contact" class="btn btn-gold">' + data.cta + '</a>';
+          '<a href="' + (data.ctaHref || ('about.html?interest=' + encodeURIComponent(data.title) + '#contact')) + '" class="btn btn-gold">' + data.cta + '</a>';
 
         // Force reflow so the entrance animation replays each time
         void answerPanel.offsetWidth;
