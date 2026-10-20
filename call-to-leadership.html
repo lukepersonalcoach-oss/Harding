@@ -138,6 +138,23 @@
   }
   .jamaica-strip a{text-decoration:underline;}
 
+  .flag{
+    display:inline-block;height:16px;width:auto;
+    vertical-align:-2px;margin-right:8px;border-radius:2px;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.7), 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .saudi-strip{
+    display:block;
+    background:#006C35;color:#FFFFFF;
+    text-align:center;font-size:0.95rem;font-weight:600;
+    padding:11px 20px;text-decoration:none;
+    border-bottom:3px solid #FFFFFF;
+    transition:background 0.2s ease;
+  }
+  .saudi-strip span{text-decoration:underline;text-underline-offset:3px;}
+  .saudi-strip:hover{background:#00562A;}
+
   .headshot{
     width:100%;max-width:260px;border-radius:4px;
     box-shadow:0 8px 24px rgba(27,42,74,0.25);
@@ -182,9 +199,13 @@
 </header>
 
 <div class="jamaica-strip">
-  Visiting Kingston 2–7 November — running The Call to Leadership for organisations during the trip.
+  <svg class="flag" viewBox="0 0 12 6" aria-hidden="true"><clipPath id="jm-c"><rect width="12" height="6"/></clipPath><g clip-path="url(#jm-c)"><rect width="12" height="6" fill="#000"/><path d="M0 0h12L6 3zM0 6h12L6 3z" fill="#009B3A"/><path d="M0 0l12 6M0 6l12-6" stroke="#FED100" stroke-width="1"/></g></svg>Visiting Kingston 2–7 November — running The Call to Leadership for organisations during the trip.
   <a href="mailto:luke@hardingconsultancy.co.uk">Get in touch</a>
 </div>
+
+<a class="saudi-strip" href="https://calltoleadership.com/" target="_blank" rel="noopener">
+  <svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#006C35"/><text x="15" y="9.5" text-anchor="middle" font-size="3.6" textLength="22" lengthAdjust="spacingAndGlyphs" fill="#fff" font-family="Arial, sans-serif" direction="rtl">لا إله إلا الله محمد رسول الله</text><path d="M8 14h13.5l1.2-.6v1.2l-1.2-.6M9 13.3v1.4" stroke="#fff" stroke-width=".8" fill="none" stroke-linecap="round"/></svg>Are you a Saudi school? <span>Click here for more info</span> &rarr;
+</a>
 
 <div class="hero">
   <div class="wrap">

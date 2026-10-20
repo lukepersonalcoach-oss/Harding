@@ -557,10 +557,17 @@ button:focus-visible {
 }
 
 .problem-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Flex rather than grid so an incomplete last row (e.g. 7 tiles = 4 + 3)
+     sits centred instead of leaving a gap on the right. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
   margin-bottom: 44px;
+}
+
+.problem-grid .problem-tile {
+  flex: 0 0 calc((100% - 3 * 16px) / 4);
 }
 
 .problem-tile {
@@ -674,11 +681,11 @@ button:focus-visible {
 }
 
 @media (max-width: 980px) {
-  .problem-grid { grid-template-columns: repeat(2, 1fr); }
+  .problem-grid .problem-tile { flex-basis: calc((100% - 16px) / 2); }
 }
 
 @media (max-width: 560px) {
-  .problem-grid { grid-template-columns: 1fr; }
+  .problem-grid .problem-tile { flex-basis: 100%; }
   .solutions-splash { padding-top: 130px; }
 }
 

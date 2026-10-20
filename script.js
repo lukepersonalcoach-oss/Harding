@@ -179,11 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
         body: "In the volatile, uncertain, complex and ambiguous world of education, senior leaders require something more than generic leadership training. My unique course, <a href=\"call-to-leadership.html\" class=\"inline-link\">The Call to Leadership</a>, teaches a coherent philosophy of leadership rather than a jumble of disconnected tools. Your SLT gains a shared understanding of excellence and profound ways to address the challenges ahead.",
         cta: "Hear more about The Call to Leadership now",
         ctaHref: "call-to-leadership.html"
-      },
-      {
-        title: "We need an outside perspective",
-        body: "Some problems seem intractable from inside a school. I offer an experienced, objective viewpoint, finding new data, offering clear diagnosis, and working alongside you to design a practical way through. I offer clarity, new perspectives, a workable plan; you gain new ideas and extra capacity.",
-        cta: "Get an outside view now"
       }
     ];
 
